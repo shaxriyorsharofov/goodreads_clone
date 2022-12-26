@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'base.html' %}
+{% block title %}Book page{% endblock title %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>Books</title>
+</head>
+<body>
+<h1>Books</h1>
+<ul>
+<div>
+    <form method="get">
+        <input type="text" placeholder="Qidiruv" name="q" value="{{ search_query }}">
+        <button>Search</button>
+    </form>
+</div>
+
+
+
+    {% for book in books %}
+    <li>
+        <a href="{% url 'book:detail' book.pk %}">{{ book.title }}</a>
+    </li>
+    <img alt="Book image" src="{{ book.book_picture.url }}">
+    <li>
+        Description:{{ book.description }}
+    </li>
+    <li>
+        ISBN:{{ book.isbn }}
+    </li>
+    <hr>
+    {% endfor %}
+</ul>
+{% endblock content %}
+</body>
+</html>
+
+
+
+

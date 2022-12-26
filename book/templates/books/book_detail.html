@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'base.html' %}
+{% block title %}Book detail page{% endblock title %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>Book detail</title>
+</head>
+<body>
+<h1>Book detail</h1>
+
+<img alt="Book image" src="{{ book.book_picture.url }}">
+
+<h3>{{ book.title }}</h3>
+Author by:
+    {% for author_b in bookauthor_set.all %}
+        {{ author_b.first_name }}
+    {% endfor %}
+
+<p>{{ book.description }}</p>
+<p>{{ book.isbn }}</p><br>
+<h2>Review</h2><hr>
+<div>
+    <form method="post" action="{% url 'book:review'  book.pk %}">
+        {% csrf_token %}
+        {{ book_review.as_p }}
+        <button>Add review</button>
+    </form>
+</div>
+<div>
+    {% for review in book.book_review.all %}
+    <b>{{ review.user.username }}</b> : {{ review.star_given }} stars
+    {% if review.user == request.user %}
+        <a href="{% url 'book:edit_review' book.pk review.pk %}">Edit</a>
+        <a href="{% url 'book:confirm_delete_review' book.pk review.pk %}">Delete</a> <br>
+    {% endif %}
+    {{ book.title }}<br>
+    {{ review.created_at }}
+    <p>{{ review.comentary }}</p>
+
+    {% endfor%}
+</div>
+
+{% endblock content %}
+</body>
+</html>
+
+

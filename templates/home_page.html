@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %} All review {% endblock title %}
+{% block content %}
+
+<h3>Home page</h3>
+{% for review in book_reviews %}
+
+    <img src="{{review.user.profile_picture.url }}" class="d-block ui-w-40 rounded-circle" alt="User picture" width="100" height="50"><br>
+    {{ review.user.username }} {{ review.star_given }} stars <br>
+    <div class="text-muted small">{{ review.created_at }}</div>
+    <p>{{ review.comentary }}</p>
+    <img src="{{ review.book2.book_picture.url }}" class="d-block ui-w-40 rounded-circle" alt="Book picture" width="200" height="200"><hr>
+
+
+
+
+
+{% endfor %}
+
+
+
+{% endblock content %}
+
+
+

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'base.html' %}
+{% block title %}Profile page{% endblock title %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<body>
+<h1>Profile</h1>
+<img alt="user image"  src="{{ user.profile_picture.url }}" width="100px" height="50px">
+ <div>
+    <a href="{% url 'users:profile_update' %}">Edit</a>
+ </div>
+
+First name:{{ user.first_name }}<br>
+Last name:{{ user.last_name }}<br>
+Email:{{ user.email }}<br>
+
+{% endblock content %}
+</body>
+</html>
+
+
